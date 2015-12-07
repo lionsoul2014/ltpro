@@ -1,6 +1,6 @@
 /**
  * linux terminal progress bar (no thread safe).
- * 	@package progress.h.
+ *     @package progress.h.
  *
  * @author chenxin <chenxin619315@gmail.com>
  */
@@ -10,10 +10,10 @@
 #include <stdio.h>
 
 typedef struct {
-    char chr;		/*tip char*/
-    char *title;	/*tip string*/
-    int style;		/*progress style*/
-    int max;		/*maximum value*/
+    char chr;        /*tip char*/
+    char *title;    /*tip string*/
+    int style;        /*progress style*/
+    int max;        /*maximum value*/
     float offset;
     char *pro;
 } progress_t;
@@ -28,4 +28,4 @@ extern void progress_show(progress_t *, float);
 
 extern void progress_destroy(progress_t *);
 
-#endif	/*ifndef*/
+#endif    /*ifndef*/

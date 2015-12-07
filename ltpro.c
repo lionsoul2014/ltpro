@@ -1,6 +1,6 @@
 /**
  * linux terminal progress bar (no thread safe).
- * 	@package progress.c
+ *     @package progress.c
  *
  * @author chenxin <chenxin619315@gmail.com>
  */
@@ -15,11 +15,11 @@
  * @max = 0
  * @val = 0
  *
- * @param	style
- * @param	tip words.
+ * @param    style
+ * @param    tip words.
  */
 extern void progress_init(
-	progress_t *bar, char *title, int max, int style)
+    progress_t *bar, char *title, int max, int style)
 {
     bar->chr = '#';
     bar->title = title;
@@ -28,10 +28,10 @@ extern void progress_init(
     bar->offset = 100 / (float)max;
     bar->pro = (char *) malloc(max+1);
     if ( style == PROGRESS_BGC_STYLE )
-	memset(bar->pro, 0x00, max+1);
+    memset(bar->pro, 0x00, max+1);
     else {
-	memset(bar->pro, 32, max);
-	memset(bar->pro+max, 0x00, 1);
+    memset(bar->pro, 32, max);
+    memset(bar->pro+max, 0x00, 1);
     }
 }
 
@@ -41,22 +41,22 @@ extern void progress_show( progress_t *bar, float bit )
     switch ( bar->style ) 
     {
     case PROGRESS_NUM_STYLE:
-	printf("\033[?25l\033[31m\033[1m%s%d%%\033[?25h\033[0m\r",
-		bar->title, (int)(bar->offset * val));
-	fflush(stdout);
-	break;
+    printf("\033[?25l\033[31m\033[1m%s%d%%\033[?25h\033[0m\r",
+        bar->title, (int)(bar->offset * val));
+    fflush(stdout);
+    break;
     case PROGRESS_CHR_STYLE:
-	memset(bar->pro, '#', val);
-	printf("\033[?25l\033[31m\033[1m%s[%-s] %d%%\033[?25h\033[0m\r", 
-		bar->title, bar->pro, (int)(bar->offset * val));
-	fflush(stdout);
-	break;
+    memset(bar->pro, '#', val);
+    printf("\033[?25l\033[31m\033[1m%s[%-s] %d%%\033[?25h\033[0m\r", 
+        bar->title, bar->pro, (int)(bar->offset * val));
+    fflush(stdout);
+    break;
     case PROGRESS_BGC_STYLE:
-	memset(bar->pro, 32, val);
-	printf("\033[?25l\033[31m\033[1m%s\033[41m %d%% %s\033[?25h\033[0m\r", 
-		bar->title, (int)(bar->offset * val), bar->pro);
-	fflush(stdout);
-	break;
+    memset(bar->pro, 32, val);
+    printf("\033[?25l\033[31m\033[1m%s\033[41m %d%% %s\033[?25h\033[0m\r", 
+        bar->title, (int)(bar->offset * val), bar->pro);
+    fflush(stdout);
+    break;
     }
 }
 
